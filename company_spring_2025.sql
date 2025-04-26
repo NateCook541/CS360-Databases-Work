@@ -252,45 +252,88 @@ SELECT * FROM part;
 -- 3 --
 UPDATE supplier SET status = 0;
 
+-- 4 --
+SELECT * FROM supplier;
 
+-- 5 --
+UPDATE supplier SET status = 1;
 
+-- 6 --
+SELECT sname, status
+FROM supplier;
 
+-- 7 --
+SELECT sname
+FROM supplier
+WHERE status = 1;
 
+-- 8 --
+SELECT sname AS 'Open Suppliers' 
+FROM supplier
+WHERE status = 1;
 
+-- 9 --
+UPDATE supplier
+SET city = 'New York City'
+WHERE city = 'New York';
 
+-- 10 --
+SELECT * FROM supplier;
+-- Write a query to test whether the previous query is case sensitive. (e.g., new york city, or NEW YORK city). Is it? --
 
+-- 11 --
+SELECT pname AS 'Parts weighting more than 5.0'
+FROM part
+WHERE weight > 5.0;
 
+-- 12 --
+SELECT pname AS 'Non red parts'
+FROM part
+WHERE color != 'red';
 
+-- 13 --
+SELECT pname AS 'Red parts in New York City'
+FROM part
+WHERE color = 'red' AND city = 'New York';
 
+-- 14 --
+UPDATE sp
+SET qty = qty * 1.10;
 
+-- 15 --
+SELECT sname AS 'Supplier names that end with S'
+FROM supplier
+WHERE sname LIKE '%S';
 
+-- 16 --
+SELECT pname AS 'Part names that have a r'
+FROM part
+WHERE pname LIKE '%r%';
 
+-- 17 -- Can you update your query so that each supplier number only appears once?
+SELECT DISTINCT s_num AS 'Parts that have a not null qty'
+FROM sp
+WHERE qty IS NOT NULL;
 
+-- 18 --
+SELECT pname, weight AS 'Parts between 3.0 and 5.0 weight'
+FROM part
+WHERE weight BETWEEN 3.0 AND 5.0;
 
+-- 19 --
+DELETE FROM supplier
+WHERE s_num = 's5';
+SELECT sname FROM supplier;
+INSERT INTO supplier (s_num, sname, status, city)
+VALUES ("s5", "Henry", 1, "Atlanta");
+SELECT sname FROM supplier;
 
+-- 20 --
+DELETE FROM supplier
+WHERE s_num = 's1';
 
+-- I get a error message saying that I can't delete s1 because its a FK in the sp table --
+-- I would need to remove s1 as a foreign key --
+-- Or I might be able to turn off FK key checks --
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- End Worksheet 4 --
