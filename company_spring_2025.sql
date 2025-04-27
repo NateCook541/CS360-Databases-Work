@@ -243,84 +243,86 @@ SELECT * FROM sp;
 
 -- Part 2 --
 
--- 1 --
+-- 1 List data from all columns for all suppliers --
 SELECT * FROM supplier;
 
--- 2 --
+-- 2 List data from all columns for all parts --
 SELECT * FROM part;
 
--- 3 --
+-- 3 Close all suppliers by updating the status to 0 --
 UPDATE supplier SET status = 0;
 
--- 4 --
+-- 4 Write a query to confirm that your previous query worked by displaying results and checking them --
 SELECT * FROM supplier;
 
--- 5 --
+-- 5 Open all suppliers up --
 UPDATE supplier SET status = 1;
 
--- 6 --
+-- 6 Show each suppliers name and status (with no other information) --
 SELECT sname, status
 FROM supplier;
 
--- 7 --
+-- 7 Show the names of all suppliers that are currently open --
 SELECT sname
 FROM supplier
 WHERE status = 1;
 
--- 8 --
+-- 8 Show how you can use the keyword AS and single quotes to rename the column label in the result set from ‘sname’ to ‘Open Suppliers’ --
 SELECT sname AS 'Open Suppliers' 
 FROM supplier
 WHERE status = 1;
 
--- 9 --
+-- 9 Update the city for suppliers in New York to New York City --
 UPDATE supplier
 SET city = 'New York City'
 WHERE city = 'New York';
 
--- 10 --
-SELECT * FROM supplier;
--- Write a query to test whether the previous query is case sensitive. (e.g., new york city, or NEW YORK city). Is it? --
+-- 10 Write a query to test whether the previous query is case sensitive. (e.g., new york city, or NEW YORK city). Is it? --
+SELECT * 
+FROM supplier
+WHERE city = 'new york city' OR city = 'NEW YORK CITY' OR city = 'New York City';
+-- It does not look to be case sensitive --
 
--- 11 --
+-- 11 Show part names of parts that weigh more than 5.0 --
 SELECT pname AS 'Parts weighting more than 5.0'
 FROM part
 WHERE weight > 5.0;
 
--- 12 --
+-- 12 Show part names and cities for parts that are not red --
 SELECT pname AS 'Non red parts'
 FROM part
 WHERE color != 'red';
 
--- 13 --
+-- 13 Show part names of parts that are red and in New York --
 SELECT pname AS 'Red parts in New York City'
 FROM part
 WHERE color = 'red' AND city = 'New York';
 
--- 14 --
+-- 14 Increase the quantity of all parts supplied by any supplier by 10% --
 UPDATE sp
 SET qty = qty * 1.10;
 
--- 15 --
+-- 15 List all supplier names that end with s --
 SELECT sname AS 'Supplier names that end with S'
 FROM supplier
 WHERE sname LIKE '%S';
 
--- 16 --
+-- 16 List all part colors that contain an ‘r’ in the color name --
 SELECT pname AS 'Part names that have a r'
 FROM part
 WHERE pname LIKE '%r%';
 
--- 17 -- Can you update your query so that each supplier number only appears once?
+-- 17 List the supplier number for all suppliers that supply at least one part --
 SELECT DISTINCT s_num AS 'Parts that have a not null qty'
 FROM sp
 WHERE qty IS NOT NULL;
 
--- 18 --
+-- 18 List part names and weights for parts that weigh between 3.0 and 5.0 --
 SELECT pname, weight AS 'Parts between 3.0 and 5.0 weight'
 FROM part
 WHERE weight BETWEEN 3.0 AND 5.0;
 
--- 19 --
+-- 19 Delete supplier s5 from the supplier table. Select all supplier names and show supplier s5 has been removed. Put s5 back in the supplier table --
 DELETE FROM supplier
 WHERE s_num = 's5';
 SELECT sname FROM supplier;
@@ -328,7 +330,7 @@ INSERT INTO supplier (s_num, sname, status, city)
 VALUES ("s5", "Henry", 1, "Atlanta");
 SELECT sname FROM supplier;
 
--- 20 --
+-- 20 Try deleting supplier s1 from the supplier table and describe what happens. What would you need to do if you wanted to delete supplier s1 --
 DELETE FROM supplier
 WHERE s_num = 's1';
 
