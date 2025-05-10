@@ -1,3 +1,5 @@
+-- Week 6 --
+
 -- List each employee name with the name of the department they work in. --
 SELECT emp_name, dept_num FROM emp JOIN dept USING (dept_num);
 
@@ -17,7 +19,9 @@ SELECT pname, s_num, qty FROM part JOIN sp ON part.p_num = sp.p_num;
 -- Convince yourself the results of your previous two queries are correct. 
 --Explain how you did this and include any queries you used. 
 -- Can you come up with a group by query that would be helpful? --
-
+SELECT p_num, COUNT(s_num), SUM(qty)
+FROM sp 
+GROUP BY p_num;
 
 -- List each supplier by name with the part numbers and qty they supply. --
 SELECT sname, p_num, qty FROM supplier JOIN sp ON supplier.s_num = sp.s_num;
@@ -29,7 +33,11 @@ JOIN part ON sp.p_num = part.p_num;
 
 -- Double-check the solution to your previous query. Is it correct? 
 -- Explain your answer and include any queries you used. --
-
+SELECT * FROM sp ORDER BY s_num;
+SELECT * FROM supplier ORDER BY s_num;
+SELECT * FROM part ORDER BY p_num;
+-- I used three select statements and just compared the data from here to the query to check, I also used order by
+-- Just to make it more readable, but there are likely better ways to do this.
 
 -- Write a query that shows supplier names and cities with part names and cities for 
 -- suppliers and part combos that exist in the sp table --
@@ -54,6 +62,8 @@ JOIN part ON sp.p_num = part.p_num
 WHERE part.pname = 'Pliers';
 
 -- List part numbers (once each) of parts supplied by the supplier 'Clark'. --
-SELECT part.p_num FROM part JOIN sp ON part.p_num = sp.p_num
+SELECT DISTINCT part.p_num FROM part JOIN sp ON part.p_num = sp.p_num
 JOIN supplier ON sp.s_num = supplier.s_num
 WHERE supplier.sname = 'Clark';
+
+-- End worksheet 6 --
