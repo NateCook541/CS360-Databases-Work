@@ -32,7 +32,7 @@ SELECT sname FROM supplier WHERE s_num = ANY (SELECT s_num FROM sp WHERE qty > (
 -- Justify the results to the previous question. Include any queries you use. --
 
 -- List supplier names of suppliers who supply at least one part supplied by supplier Jones. Do not display the name Jones. --
-
+SELECT sname FROM supplier WHERE s_num = ANY (SELECT s_num FROM sp WHERE p_num IN (SELECT p_num FROM sp WHERE s_num = (SELECT s_num FROM supplier WHERE sname = 'Jones'))); 
 
 
 
